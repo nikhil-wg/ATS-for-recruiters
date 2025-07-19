@@ -1,0 +1,210 @@
+# Programming Languages
+Python
+JavaScript
+TypeScript
+Java
+C
+C++
+C#
+Go
+Rust
+Kotlin
+Swift
+R
+PHP
+Ruby
+Scala
+Perl
+Shell Script
+MATLAB
+Dart
+
+# Web Development
+HTML
+CSS
+SASS
+Tailwind CSS
+Bootstrap
+JavaScript
+TypeScript
+React
+Vue.js
+Angular
+Next.js
+Nuxt.js
+Svelte
+jQuery
+EJS
+Handlebars
+
+# Backend Development
+Node.js
+Express.js
+Django
+Flask
+Spring Boot
+Ruby on Rails
+ASP.NET
+Laravel
+FastAPI
+NestJS
+Hapi.js
+
+# Databases
+MySQL
+PostgreSQL
+MongoDB
+SQLite
+Redis
+MariaDB
+Oracle
+Cassandra
+DynamoDB
+Elasticsearch
+Firebase Realtime Database
+Supabase
+
+# DevOps & CI/CD
+Docker
+Kubernetes
+Jenkins
+GitHub Actions
+GitLab CI
+Ansible
+Terraform
+AWS CodePipeline
+CircleCI
+Travis CI
+Vagrant
+Prometheus
+Grafana
+Bash
+Linux
+
+# Cloud Platforms
+AWS
+Microsoft Azure
+Google Cloud Platform (GCP)
+Heroku
+Netlify
+Vercel
+DigitalOcean
+Firebase
+
+# Version Control
+Git
+GitHub
+GitLab
+Bitbucket
+
+# Artificial Intelligence / Machine Learning
+TensorFlow
+PyTorch
+Keras
+Scikit-learn
+OpenCV
+Hugging Face Transformers
+XGBoost
+LightGBM
+spaCy
+Pandas
+NumPy
+Matplotlib
+Seaborn
+Stable Diffusion
+LangChain
+OpenAI API
+
+# Data Engineering
+Apache Spark
+Apache Kafka
+Apache Hadoop
+Airflow
+dbt
+ETL Pipelines
+Snowflake
+Data Warehousing
+BigQuery
+
+# Mobile Development
+React Native
+Flutter
+Kotlin (Android)
+Swift (iOS)
+Xamarin
+Ionic
+
+# Testing
+Jest
+Mocha
+Chai
+Cypress
+Selenium
+JUnit
+Pytest
+Postman
+Playwright
+
+# Cybersecurity
+Wireshark
+Burp Suite
+Metasploit
+Nmap
+Kali Linux
+OWASP
+Penetration Testing
+Vulnerability Assessment
+
+# Blockchain
+Solidity
+Ethereum
+Web3.js
+Hardhat
+Truffle
+Metamask
+IPFS
+Polygon
+
+# Game Development
+Unity
+Unreal Engine
+Godot
+Cocos2d
+OpenGL
+Three.js
+
+# Other Technologies
+Figma
+Adobe XD
+JIRA
+Trello
+Notion
+Zapier
+n8n
+Zustand
+Recoil
+Redux
+Electron.js
+WebAssembly
+WebRTC
+OpenGL
+RabbitMQ
+gRPC
+
+# Languages for Data Science / Stats
+R
+Julia
+MATLAB
+SAS
+
+# Emerging & Misc
+AR/VR Development
+LLMs
+Edge Computing
+Quantum Computing (Qiskit)
+No-Code / Low-Code
+PowerApps
+Bubble.io
+Retool
+Prompt Engineering
+AutoML
