@@ -24,10 +24,28 @@ function page() {
     setFormData(prev => ({ ...prev, resume: file }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log('Form submitted:', formData);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!formData.resume) {
+    alert("Please upload a resume.");
+    return;
+  }
+
+  const uploadData = new FormData();
+  uploadData.append("files", formData.resume);
+
+  try {
+    const res = await fetch("/api/candidate/upload-resume", {
+      method: "POST",
+      body: uploadData,
+    });
+
+    if (!res.ok) throw new Error("Upload failed");
+
+    const result = await res.json();
+    console.log("Parsed resume result:", result);
+
     setIsSubmitted(true);
     setTimeout(() => {
       setIsModalOpen(false);
@@ -38,10 +56,15 @@ function page() {
         mobile: '',
         branch: '',
         experience: '',
-        resume: null
+        resume: null,
       });
     }, 2000);
-  };
+  } catch (err) {
+    console.error("Error uploading resume:", err);
+    alert("Something went wrong while uploading the resume.");
+  }
+};
+
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
