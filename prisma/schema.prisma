@@ -14,4 +14,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Jobpost {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  location    String
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
 
+model Candidate {
+  id            Int    @id @default(autoincrement())
+  name          String
+  email         String
+  phone         String
+  resumeUrl     String
+  location      String
+  jobpostId     Int
+  status        String
+  experience    String
+  address       String
+  qualification String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
