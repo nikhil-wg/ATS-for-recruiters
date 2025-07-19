@@ -4,8 +4,6 @@ export async function POST(req) {
   // getting resume file from request
   
    
-
-
 }
 
 export async function GET() {
