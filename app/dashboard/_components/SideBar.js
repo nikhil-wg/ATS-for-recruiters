@@ -27,7 +27,7 @@ function SideBar() { // Keep as function SideBar to match default export
             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
               <Briefcase className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">RecruitPro</span>
+            <span className="text-xl font-bold text-gray-900"> Recruit Kanaka </span>
           </div>
         </div>
 

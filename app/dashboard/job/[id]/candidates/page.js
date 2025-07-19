@@ -4,7 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation"; // Import useRouter from Next.js
 import { Button } from "@/components/ui/button"; // Assuming this path is correct
 import { ArrowLeft, Upload } from "lucide-react"; // Icons from lucide-react
-import { CandidateTable } from "./CandidateTable"; // This component needs to be created
+import { CandidateTable } from "../../../_components/CandidateTable"; // This component needs to be created
 
 // This component will receive 'params' as a prop from Next.js App Router
 // The dynamic segment '[id]' will be available as params.id
