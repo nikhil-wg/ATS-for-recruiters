@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 
-export async function POST(req) {
+export async function POST(req) 
+{
   // getting resume file from request
   
    
