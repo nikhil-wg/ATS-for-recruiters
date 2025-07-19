@@ -22,7 +22,7 @@ function SideBar() {
         
           <p className="text-sm mt-1"> 2 out of 5 Pdf Uploaded</p>
           <p className="text-xs text-gray-400 mt-2">
-           
+           <h1>Uploaded RESUMES</h1>
           </p>
         </div>
       </div>
