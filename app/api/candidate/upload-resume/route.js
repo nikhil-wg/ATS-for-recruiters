@@ -1,7 +1,10 @@
-import { NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
 import { parseResumeFromBuffer } from "./parser"; // adjust if needed
+
+
+import { NextResponse, NextRequest } from "next/server";
+
 
 // Uploads folder
 const uploadDir = path.join(process.cwd(), "uploads");
