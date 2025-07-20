@@ -1,9 +1,23 @@
 import fs from "fs";
-import pdfParse from "pdf-parse";
 import path from "path";
+import pdfParse from "pdf-parse";
 
-const skillsPath = path.join(process.cwd(), "app/api/candidate/upload-resume/skills.txt");
-const SKILLS = fs.readFileSync(skillsPath, "utf-8").split("\n").map(s => s.trim()).filter(Boolean);
+let SKILLS = [];
+
+try {
+  const skillsPath = path.join(
+    process.cwd(),
+    // "app/api/candidate/upload-resume/skills.txt"
+    "/util/skills.txt"
+  );
+  const skillsFile = fs.readFileSync(skillsPath, "utf-8");
+  SKILLS = skillsFile
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+} catch (err) {
+  console.error("Failed to load skills.txt:", err.message);
+}
 
 function extractEmail(text) {
   const match = text.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
@@ -16,7 +30,10 @@ function extractPhone(text) {
 }
 
 function extractName(text) {
-  const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
+  const lines = text
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
   return lines.length > 0 ? lines[0] : "";
 }
 
@@ -33,13 +50,24 @@ function extractSkills(text) {
 
 function extractEducation(text) {
   const educationKeywords = [
-    "B\\.Tech", "B\\.E", "Bachelor", "Master", "M\\.Tech", "M\\.E", "MCA", "Diploma", "SSC", "HSC", "CBSE", "ICSE"
+    "B\\.Tech",
+    "B\\.E",
+    "Bachelor",
+    "Master",
+    "M\\.Tech",
+    "M\\.E",
+    "MCA",
+    "Diploma",
+    "SSC",
+    "HSC",
+    "CBSE",
+    "ICSE",
   ];
-  const lines = text.split("\n").map(l => l.trim());
+  const lines = text.split("\n").map((l) => l.trim());
   const education = [];
 
   for (const line of lines) {
-    if (educationKeywords.some(kw => new RegExp(kw, "i").test(line))) {
+    if (educationKeywords.some((kw) => new RegExp(kw, "i").test(line))) {
       education.push(line);
     }
   }
@@ -49,6 +77,8 @@ function extractEducation(text) {
 
 export async function parseResumeFromBuffer(buffer, filename) {
   const { text } = await pdfParse(buffer);
+  console.log("control reach here ");
+  console.log(text);
 
   return {
     file: filename,
