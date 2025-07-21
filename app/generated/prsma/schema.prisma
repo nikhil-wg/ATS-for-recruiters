@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./../app/generated/prsma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Jobpost {
+  id            Int         @id @default(autoincrement())
+  title         String
+  description   String
+  package       String
+  type          String
+  location      String
+  category      String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  requirement   String[]
+  qualification String[]
+  candidates    Candidate[]
+}
+
+model Candidate {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  email             String              @unique
+  phone             String
+  resumeUrl         String?
+  location          String
+  jobpostId         Int
+  status            String
+  experience        String
+  address           String
+  parsedText        String?
+  testScore         Float?
+  testStatus        String              @default("pending")
+  appliedAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  qualification     String[]
+  jobpost           Jobpost             @relation(fields: [jobpostId], references: [id])
+  interviews        Interview[]         @relation("CandidateToInterview")
+  Offer             Offer[]
+  RecruitmentStatus RecruitmentStatus[]
+}
+
+model Interview {
+  id          Int       @id @default(autoincrement())
+  candidateId Int
+  interviewer String
+  round       Int
+  result      String
+  scheduledAt DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  candidate   Candidate @relation("CandidateToInterview", fields: [candidateId], references: [id])
+}
+
+model RecruitmentStatus {
+  id          Int       @id @default(autoincrement())
+  candidateId Int
+  status      String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Candidate   Candidate @relation(fields: [candidateId], references: [id])
+}
+
+model Offer {
+  id          Int       @id @default(autoincrement())
+  candidateId Int
+  offerLetter String
+  sendAt      DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Candidate   Candidate @relation(fields: [candidateId], references: [id])
+}

@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import path from "path";
 import fs from "fs";
-import { parseResumeWithGeminiModel } from "./parser";
+// import prisma from "@lib/prisma";
 
 const uploadDir = path.join(process.cwd(), "uploads");
 
@@ -19,6 +19,7 @@ export async function POST(req) {
   try {
     const formData = await req.formData();
     const file = formData.get("file");
+    console.log(formData.get("branch"));
 
     if (!file) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
@@ -30,16 +31,29 @@ export async function POST(req) {
     const filePath = path.join(uploadDir, filename);
     fs.writeFileSync(filePath, buffer);
 
-    const data = await parseResumeWithGeminiModel(buffer);
-    console.log(data);
+    // const data = await parseResumeWithGeminiModel(buffer);
+    // console.log(data);
 
-    const dataToStore = {
-        
-    }
+
+
+    // await prisma.candidate.create({
+    //   data: {
+    //     name: data.name,
+    //     email: data.email,
+    //     phone: data.phone,
+    //     jobpost: 1,
+    //     status: "CV Recived",
+
+
+    //   }
+    // })
+
+
+
 
     return NextResponse.json({
       message: "everthing went well",
-      parsedData: data,
+      // parsedData: data,
     });
   } catch (err) {
     console.log(err);

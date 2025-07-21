@@ -46,8 +46,12 @@ function page() {
     }
 
     const uploadData = new FormData();
-    console.log("resume:", formData.resume);
+    for (const key in formData) {
+      if (key == resume) continue;
+      uploadData.append(key, formData[key]);
+    }
     uploadData.append("file", formData.resume);
+
 
     try {
       // const res = await axios.post("/api/candidate/upload-resume", uploadData);
@@ -261,7 +265,7 @@ function page() {
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      //   placeholder="Enter your full name"
+                    //   placeholder="Enter your full name"
                     />
                   </div>
 
@@ -276,7 +280,7 @@ function page() {
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      //   placeholder="Enter your email"
+                    //   placeholder="Enter your email"
                     />
                   </div>
 
@@ -291,7 +295,7 @@ function page() {
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      //   placeholder="Enter your mobile number"
+                    //   placeholder="Enter your mobile number"
                     />
                   </div>
 
