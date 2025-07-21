@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"; // Assuming this is a shadcn/ui c
 import { Label } from "@/components/ui/label"; // Assuming this is a shadcn/ui component
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"; // Assuming these are shadcn/ui components
 import { ArrowLeft, Upload, FileText, X } from "lucide-react"; // Icons from lucide-react
+import axios from "axios";
 
 export default function JobManage() {
   const params = useParams(); // Get dynamic route parameters
@@ -29,8 +30,8 @@ export default function JobManage() {
       const maxFileSize = 10 * 1024 * 1024; // 10 MB
 
       const isAllowedType = fileType === "application/pdf" ||
-                            fileType === "application/msword" || // .doc
-                            fileType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"; // .docx
+        fileType === "application/msword" || // .doc
+        fileType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"; // .docx
 
       return isAllowedType && fileSize <= maxFileSize;
     });
@@ -51,6 +52,17 @@ export default function JobManage() {
       router.push(`/jobs/${jobId}/candidates`); // Navigate back to candidates view
     }, 1500);
   };
+const handleSaveChanges = () => {
+  const jobDetails = {
+    title: document.getElementById("job-title")?.value,
+    department: document.getElementById("department")?.value,
+    location: document.getElementById("location")?.value,
+    type: document.getElementById("job-type")?.value,
+  };
+
+  console.log("Job Details Submitted:", jobDetails);
+};
+
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -188,7 +200,13 @@ export default function JobManage() {
                 </div>
               </div>
               <div className="flex justify-end pt-4 border-t border-gray-100">
-                <Button variant="outline" className="rounded-md shadow-sm hover:shadow-md transition-shadow">Save Changes</Button>
+                <Button
+                  onClick={handleSaveChanges}
+                  variant="outline"
+                  className="rounded-md shadow-sm hover:shadow-md transition-shadow"
+                >
+                  Save Changes
+                </Button>
               </div>
             </CardContent>
           </Card>
