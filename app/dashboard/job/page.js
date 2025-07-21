@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Search, Filter, Briefcase, MoreHorizontal, MapPin, Calendar, Users } from "lucide-react"; // Added icons used by JobCard
-
+import { CreateJob } from "./_components/CreateJob";
 // Mock job data
 const jobs = [
   {
@@ -92,13 +92,15 @@ export default function Jobs() {
           <h1 className="text-3xl font-bold text-gray-900">Job Listings</h1>
           <p className="text-muted-foreground text-gray-600">Manage your job postings and track applications</p>
         </div>
+        <CreateJob>
+
         <Button
-          onClick={handleCreateJob}
-          className="bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-md hover:shadow-lg transition-shadow rounded-md"
-        >
+          className="bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-md hover:shadow-lg  rounded-md"
+          >
           <Plus className="w-4 h-4 mr-2" />
           Create Job
         </Button>
+          </CreateJob>
       </div>
 
       {/* Search and Filter Section */}
