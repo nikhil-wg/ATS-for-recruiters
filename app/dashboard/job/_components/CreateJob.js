@@ -12,19 +12,18 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export function CreateJob({children}) {
+export function CreateJob({ children }) {
   return (
     <Dialog>
       <form>
         <DialogTrigger asChild>
           {children}
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] bg-white rounded-lg shadow-lg">
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
+              Make changes to your profile here. Click save when you're done.
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4">
@@ -48,3 +47,4 @@ export function CreateJob({children}) {
     </Dialog>
   )
 }
+
