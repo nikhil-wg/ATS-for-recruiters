@@ -1,70 +1,81 @@
-"use client"
-import React, { useState } from 'react';
-import { MapPin, Calendar, Users, DollarSign, Clock, X, Upload, Check } from 'lucide-react';
+"use client";
+import React, { useState } from "react";
+import {
+  MapPin,
+  Calendar,
+  Users,
+  DollarSign,
+  Clock,
+  X,
+  Upload,
+  Check,
+} from "lucide-react";
+import axios from "axios";
 
 function page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    mobile: '',
-    branch: '',
-    experience: '',
-    resume: null
+    fullName: "",
+    email: "",
+    mobile: "",
+    branch: "",
+    experience: "",
+    locatiion: "",
+    address: "",
+    resume: null,
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0] || null;
-    setFormData(prev => ({ ...prev, resume: file }));
+    setFormData((prev) => ({ ...prev, resume: file }));
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!formData.resume) {
-    alert("Please upload a resume.");
-    return;
-  }
+    if (!formData.resume) {
+      console.log("Resume not uploaded");
+      alert("Please upload a resume.");
+      return;
+    }
 
-  const uploadData = new FormData();
-  uploadData.append("files", formData.resume);
+    const uploadData = new FormData();
+    console.log("resume:", formData.resume);
+    uploadData.append("file", formData.resume);
 
-  try {
-    const res = await fetch("/api/candidate/upload-resume", {
-      method: "POST",
-      body: uploadData,
-    });
+    try {
+      // const res = await axios.post("/api/candidate/upload-resume", uploadData);
+      console.log("before sending the request");
+      const res = await axios.post("/api/candidate/upload", uploadData);
+      console.log("Resume upload response:", res.data);
+      console.log("after sending the request");
 
-    if (!res.ok) throw new Error("Upload failed");
+      // if (!res.ok) throw new Error("Upload failed");
 
-    const result = await res.json();
-    console.log("Parsed resume result:", result);
-
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsModalOpen(false);
-      setIsSubmitted(false);
-      setFormData({
-        fullName: '',
-        email: '',
-        mobile: '',
-        branch: '',
-        experience: '',
-        resume: null,
-      });
-    }, 2000);
-  } catch (err) {
-    console.error("Error uploading resume:", err);
-    alert("Something went wrong while uploading the resume.");
-  }
-};
-
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setIsSubmitted(false);
+        setFormData({
+          fullName: "",
+          email: "",
+          mobile: "",
+          branch: "",
+          experience: "",
+          resume: null,
+        });
+      }, 2000);
+    } catch (err) {
+      console.error("Error uploading resume:", err);
+      alert("Something went wrong while uploading the resume.");
+    }
+  };
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
@@ -78,7 +89,9 @@ function page() {
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">Kanaka Software</h1>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Kanaka Software
+            </h1>
             <div className="text-sm text-gray-600">
               <span className="inline-flex items-center gap-1">
                 <MapPin className="w-4 h-4" />
@@ -103,12 +116,14 @@ function page() {
                 Apply Now
               </button>
             </div>
-            <p className="text-blue-100 text-lg mb-4">Join our innovative team building the future of technology</p>
-            
+            <p className="text-blue-100 text-lg mb-4">
+              Join our innovative team building the future of technology
+            </p>
+
             <div className="flex flex-wrap gap-6 text-sm">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>Puen, Maharastra / Remote</span>
+                <span>Pune, Maharastra / Remote</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
@@ -127,37 +142,50 @@ function page() {
 
           {/* Job Content */}
           <div className="p-8">
-
             {/* Job Description */}
             <section className="mb-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Job Description</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Job Description
+              </h3>
               <p className="text-gray-700 leading-relaxed mb-4">
-                We're seeking a talented Senior Software Engineer to join our dynamic development team. 
-                You'll be responsible for designing, developing, and maintaining high-quality software solutions 
-                that serve millions of users worldwide. This is an excellent opportunity to work with cutting-edge 
-                technologies and make a significant impact on our products.
+                We're seeking a talented Senior Software Engineer to join our
+                dynamic development team. You'll be responsible for designing,
+                developing, and maintaining high-quality software solutions that
+                serve millions of users worldwide. This is an excellent
+                opportunity to work with cutting-edge technologies and make a
+                significant impact on our products.
               </p>
             </section>
 
             {/* Requirements */}
             <section className="mb-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Requirements</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Requirements
+              </h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Technical Skills</h4>
+                  <h4 className="font-medium text-gray-900 mb-2">
+                    Technical Skills
+                  </h4>
                   <ul className="space-y-1 text-gray-700 text-sm">
                     <li>• 5+ years of software development experience</li>
                     <li>• Proficiency in JavaScript, TypeScript, React</li>
                     <li>• Experience with Node.js and Express</li>
                     <li>• Knowledge of SQL and NoSQL databases</li>
-                    <li>• Familiarity with cloud platforms (AWS, Azure, GCP)</li>
+                    <li>
+                      • Familiarity with cloud platforms (AWS, Azure, GCP)
+                    </li>
                     <li>• Experience with Git version control</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Qualifications</h4>
+                  <h4 className="font-medium text-gray-900 mb-2">
+                    Qualifications
+                  </h4>
                   <ul className="space-y-1 text-gray-700 text-sm">
-                    <li>• Bachelor's degree in Computer Science or related field</li>
+                    <li>
+                      • Bachelor's degree in Computer Science or related field
+                    </li>
                     <li>• Strong problem-solving and analytical skills</li>
                     <li>• Excellent communication and teamwork abilities</li>
                     <li>• Experience with Agile development methodologies</li>
@@ -169,23 +197,36 @@ function page() {
 
             {/* Benefits */}
             <section className="mb-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">What We Offer</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                What We Offer
+              </h3>
               <div className="grid md:grid-cols-3 gap-4">
                 <div className="bg-blue-50 p-4 rounded-lg">
-                  <h4 className="font-medium text-blue-900 mb-2">💰 Competitive Package</h4>
-                  <p className="text-sm text-blue-700">Competitive salary, equity, and annual bonuses</p>
+                  <h4 className="font-medium text-blue-900 mb-2">
+                    💰 Competitive Package
+                  </h4>
+                  <p className="text-sm text-blue-700">
+                    Competitive salary, equity, and annual bonuses
+                  </p>
                 </div>
                 <div className="bg-green-50 p-4 rounded-lg">
-                  <h4 className="font-medium text-green-900 mb-2">🏥 Health & Wellness</h4>
-                  <p className="text-sm text-green-700">Comprehensive health, dental, and vision insurance</p>
+                  <h4 className="font-medium text-green-900 mb-2">
+                    🏥 Health & Wellness
+                  </h4>
+                  <p className="text-sm text-green-700">
+                    Comprehensive health, dental, and vision insurance
+                  </p>
                 </div>
                 <div className="bg-purple-50 p-4 rounded-lg">
-                  <h4 className="font-medium text-purple-900 mb-2">📚 Growth</h4>
-                  <p className="text-sm text-purple-700">Learning stipend and career development opportunities</p>
+                  <h4 className="font-medium text-purple-900 mb-2">
+                    📚 Growth
+                  </h4>
+                  <p className="text-sm text-purple-700">
+                    Learning stipend and career development opportunities
+                  </p>
                 </div>
               </div>
             </section>
-
           </div>
         </div>
       </main>
@@ -196,7 +237,9 @@ function page() {
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-gray-900">Apply for Position</h3>
+                <h3 className="text-xl font-semibold text-gray-900">
+                  Apply for Position
+                </h3>
                 <button
                   onClick={closeModal}
                   className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -211,14 +254,14 @@ function page() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Full Name *
                     </label>
-                     <input
+                    <input
                       type="text"
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    //   placeholder="Enter your full name"
+                      //   placeholder="Enter your full name"
                     />
                   </div>
 
@@ -233,7 +276,7 @@ function page() {
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    //   placeholder="Enter your email"
+                      //   placeholder="Enter your email"
                     />
                   </div>
 
@@ -248,7 +291,7 @@ function page() {
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    //   placeholder="Enter your mobile number"
+                      //   placeholder="Enter your mobile number"
                     />
                   </div>
 
@@ -337,7 +380,8 @@ function page() {
                     Application Submitted!
                   </h3>
                   <p className="text-gray-600">
-                    Thank you for your interest. We'll review your application and get back to you soon.
+                    Thank you for your interest. We'll review your application
+                    and get back to you soon.
                   </p>
                 </div>
               )}
