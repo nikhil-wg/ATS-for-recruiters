@@ -47,7 +47,7 @@ function page() {
 
     const uploadData = new FormData();
     for (const key in formData) {
-      if (key == resume) continue;
+      if (key == "resume") continue;
       uploadData.append(key, formData[key]);
     }
     uploadData.append("file", formData.resume);
